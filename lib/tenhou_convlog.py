@@ -6,7 +6,8 @@ import argparse
 from pathlib import Path
 
 def get_mjai_log(tenhou_id):
-    cmd = "akochan-reviewer/target/debug/akochan-reviewer --no-review --tenhou-id " + tenhou_id + " --mjai-out -"
+    # cmd = "akochan-reviewer/target/debug/akochan-reviewer --no-review --tenhou-id " + tenhou_id + " --mjai-out -"
+    cmd = "akochan-reviewer/target/debug/mjai-reviewer --no-review --tenhou-id " + tenhou_id + " --mjai-out -"
     try:
         output = subprocess.check_output(cmd.split())
         return output.decode('utf-8').rstrip()
