@@ -2,3 +2,6 @@
 /tenhou_rawlog
 /tenhou_rawlog_zip
 /lib/__pycache__
+/tenhou_mjailog
+/log
+*.exe
