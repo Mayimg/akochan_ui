@@ -64,7 +64,7 @@ class Data_Processor:
                     x = game_state.to_numpy(action["actor"])
                     self.x_discard.append(x)
 
-                    y = np.zeros(34, dtype=np.int)
+                    y = np.zeros(34, dtype=int)
                     i_dahai = i+1 if game_record[i+1]["type"] == "dahai" else i+2
                     hai = hai_str_to_int(game_record[i_dahai]["pai"])
                     y[get_hai34(hai)] = 1
@@ -155,7 +155,7 @@ def proc_batch_mjailog(input_logdir, input_regex, output_npzdir, update):
         print("process:", file_name)
         proc_mjailog(input_logdir, file_name, output_npzdir)
 
-    joblib.Parallel(n_jobs=6)(joblib.delayed(loop_func)(file_name) for file_name in file_list)
+    joblib.Parallel(n_jobs=12)(joblib.delayed(loop_func)(file_name) for file_name in file_list)
 
 def get_current_feature(current_record, legal_actions):
     if len(current_record) == 0:

@@ -275,7 +275,7 @@ class Fuuro_Elem:
             tmp[get_hai34(self.hai)] += 1
         for hai in self.consumed:
             tmp[get_hai34(hai)] += 1
-        ret = np.zeros((4, 34), dtype=np.int)
+        ret = np.zeros((4, 34), dtype=int)
         for hai in range(34):
             for i in range(tmp[hai]):
                 ret[i][hai] = 1
@@ -336,15 +336,15 @@ class Player_State:
 
     def to_numpy_fuuro(self):
         if len(self.fuuro) == 0:
-            return np.zeros((4*4, 34), dtype=np.int)
+            return np.zeros((4*4, 34), dtype=int)
         else:
             ret = np.concatenate([elem.to_numpy() for elem in self.fuuro])
-            zeros = np.zeros((4*(4 - len(self.fuuro)), 34), dtype=np.int)
+            zeros = np.zeros((4*(4 - len(self.fuuro)), 34), dtype=int)
             return np.concatenate([ret, zeros])
 
     def to_numpy_kawa(self):
         length = 20
-        ret = np.zeros((length*2, 34), dtype=np.int)
+        ret = np.zeros((length*2, 34), dtype=int)
         for i in range(min(len(self.kawa),length)):
             hai = get_hai34(self.kawa[i].hai)
             ret[i*2][hai] = 1
@@ -356,20 +356,20 @@ class Player_State:
         tmp = get_hai34_array(self.tehai)
         if self.prev_tsumo != 0:
             tmp[get_hai34(self.prev_tsumo)] += 1
-        ret = np.zeros((4, 34), dtype=np.int)
+        ret = np.zeros((4, 34), dtype=int)
         for hai in range(34):
             for i in range(tmp[hai]):
                 ret[i][hai] = 1
         return ret
 
     def to_numpy_jikaze(self):
-	    ret = np.zeros((4,34), dtype=np.int)
+	    ret = np.zeros((4,34), dtype=int)
 	    for i in range(34):
 	        ret[self.jikaze][i] = 1
 	    return ret
 
     def to_numpy_score(self):
-        ret = np.zeros((71,34), dtype=np.int)
+        ret = np.zeros((71,34), dtype=int)
         if self.score < 0:
             m = 0
         elif self.score < 70000:
@@ -510,19 +510,19 @@ class Game_State:
         }
 
     def to_numpy_bakaze(self):
-	    ret = np.zeros((4,34), dtype=np.int)
+	    ret = np.zeros((4,34), dtype=int)
 	    for i in range(34):
 	        ret[self.bakaze][i] = 1
 	    return ret
 
     def to_numpy_kyoku(self):
-	    ret = np.zeros((4,34), dtype=np.int)
+	    ret = np.zeros((4,34), dtype=int)
 	    for i in range(34):
 	        ret[self.kyoku-1][i] = 1
 	    return ret
 
     def to_numpy_honba(self):
-	    ret = np.zeros((10,34), dtype=np.int)
+	    ret = np.zeros((10,34), dtype=int)
 	    if self.honba < 9:
 	        for i in range(34):
 		        ret[self.honba][i] = 1
@@ -532,7 +532,7 @@ class Game_State:
 	    return ret
 
     def to_numpy_kyotaku(self):
-	    ret = np.zeros((10,34), dtype=np.int)
+	    ret = np.zeros((10,34), dtype=int)
 	    if self.kyotaku < 9:
 	        for i in range(34):
 		        ret[self.kyotaku][i] = 1
@@ -545,7 +545,7 @@ class Game_State:
         tmp = [0 for i in range(38)]
         for d in self.dora_marker:
             tmp[get_hai34(d)] += 1
-        ret = np.zeros((4, 34), dtype=np.int)
+        ret = np.zeros((4, 34), dtype=int)
         for hai in range(34):
             for i in range(tmp[hai]):
                 ret[i][hai] = 1
@@ -562,7 +562,7 @@ class Game_State:
         # my_pid is 0,1,2,3
         ps = np.concatenate([self.player_state[(my_pid + i)%4].to_numpy(i == 0) for i in range(4)])
         #ps = np.concatenate([self.player_state[(my_pid + i)%4].to_numpy(True) for i in range(4)])
-        ret = np.zeros((4,34), dtype=np.int)
+        ret = np.zeros((4,34), dtype=int)
         tmp = [0 for i in range(34)]
         for c in consumed_hai:
             tmp[get_hai34(hai_str_to_int(c))] += 1
@@ -589,11 +589,11 @@ class Game_State:
         # my_pid is 0,1,2,3
         ps = np.concatenate([self.player_state[(my_pid + i)%4].to_numpy(i == 0) for i in range(4)])
         #ps = np.concatenate([self.player_state[(my_pid + i)%4].to_numpy(True) for i in range(4)])
-        ret = np.zeros((4,34), dtype=np.int)
+        ret = np.zeros((4,34), dtype=int)
         for i in range(4):
             ret[i][get_hai34(hai_str_to_int(consumed_hai[0]))] = 1
         #print(ret)
-        kan_t = np.zeros((3,34), dtype=np.int)
+        kan_t = np.zeros((3,34), dtype=int)
         kan_type = get_kan_type()
         for i in range(34):
             kan_t[kan_type][i] = 1
